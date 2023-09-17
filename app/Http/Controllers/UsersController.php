@@ -20,9 +20,38 @@ class UsersController extends Controller
 	public function index()
 	{
 
-		$this->check_permission('view_users'); // Verificar permissão
+		// Verificar permissão de visualização de usuários
+		$this->check_permission('view_users');
 
-		$users = User::all();
+		$user = auth()->user(); // Obtém o usuário autenticado
+
+		if ($user->hasRole('Superuser')) { // Verifica se o usuário tem a função 'Superuser'
+			$users = User::all(); // Lista todos os usuários se for 'Superuser'
+		} else {
+			$users = User::where(function ($query) use ($user) {
+				// A partir daqui, você está filtrando os usuários com base nas condições especificadas
+
+				// 1. Exclua os usuários que têm a função 'Superuser'
+				$query->whereDoesntHave('roles', function ($roleQuery) {
+					$roleQuery->where('name', 'Superuser');
+				})
+
+					// 2. E, em seguida, verifique duas condições:
+					->where(function ($innerQuery) use ($user) {
+						// a. Usuários sem função
+						$innerQuery->whereDoesntHave('roles')
+							// b. Ou usuários que não têm a mesma função que o usuário autenticado
+							->orWhereDoesntHave('roles', function ($roleQuery) use ($user) {
+							$roleQuery->where('name', $user->roles->first()->name);
+						});
+					});
+			})->get(); // Obtenha os usuários que atendem a essas condições
+		}
+
+
+
+		// Agora, $users conterá os usuários filtrados com base nas permissões
+
 		return view('users.index', compact('users'));
 
 	}
@@ -31,17 +60,23 @@ class UsersController extends Controller
 	//Mostrar o formulário para criar um novo recurso.
 	public function create()
 	{
+		$user = auth()->user(); // Obtém o usuário autenticado
 
-		$this->check_permission('create_users'); // Verificar permissão
-
+		// Inicializa as variáveis com todos os valores
 		$permissions = Permission::all();
 		$roles = Role::all();
+
+		if (!$user->hasRole('Superuser')) {
+			$roles = $roles->filter(function ($role) use ($user) {
+				// Mantenha apenas as funções que não são 'Superuser' ou são diferentes da função do usuário autenticado
+				return $role->name !== 'Superuser' && $role->name !== $user->roles->first()->name;
+			});
+		}
 
 		return view('users.create', compact('permissions', 'roles'));
 	}
 
-
-	//Armazenar um novo recurso recém-criado no armazenamento.
+	//Armazenar um novo usuario atraves do painel de adiministrador
 	public function store(Request $request)
 	{
 
@@ -85,6 +120,15 @@ class UsersController extends Controller
 		$roles = Role::all();
 		$user_roles = $user->getRoleNames();
 		$user_permissions = $user->getDirectPermissions();
+
+
+
+		if (!$user->hasRole('Superuser')) {
+			$roles = $roles->filter(function ($role) use ($user) {
+				// Mantenha apenas as funções que não são 'Superuser' ou são diferentes da função do usuário autenticado
+				return $role->name !== 'Superuser' && $role->name !== 'Administrador';
+			});
+		}
 
 		return view(
 			'users.edit',
