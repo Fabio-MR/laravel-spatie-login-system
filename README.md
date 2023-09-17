@@ -68,3 +68,6 @@ Para fins de teste, você pode usar os seguintes usuários que foram criados dur
 - Senha: secret
 - Papel: Comum
 
+
+Para acessar o sistema em funcionamento, visite [aqui](http://login-system.raiderzonline.net/).
+
