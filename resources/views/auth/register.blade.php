@@ -23,7 +23,7 @@
                             </div>
                             <div class="mt-3 mb-4 mt-md-4 mb-md-5" data-bs-theme="light">
                                 <p class="text-white">Te uma conta?<br>
-                                    <a class="btn btn-outline-light mt-2 px-4" href="{{ route('login.index') }}">Login</a>
+                                    <a class="btn btn-outline-light mt-2 px-4" href="{{ route('login') }}">Login</a>
                                 </p>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                                 <hr>
                                 <div class="text-white text-center">Ja tem uma conta?<br>
                                     <a class="text-decoration-underline link-light"
-                                        href="{{ route('login.index') }}">Entrar!</a>
+                                        href="{{ route('login') }}">Entrar!</a>
                                 </div>
 
                             </div>

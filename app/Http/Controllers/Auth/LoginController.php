@@ -42,7 +42,7 @@ class LoginController extends Controller
 
         throw ValidationException::withMessages([
             'email' => 'As credenciais de login fornecidas são inválidas.',
-        ])->redirectTo(route('login.index'));
+        ])->redirectTo(route('login'));
     }
 
 
@@ -51,7 +51,7 @@ class LoginController extends Controller
     {
         Auth::logout();
 
-        return redirect(route('login.index'));
+        return redirect(route('login'));
     }
 
 

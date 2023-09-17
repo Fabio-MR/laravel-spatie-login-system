@@ -25,16 +25,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-
 Route::controller(LoginController::class)->group(function () {
-    Route::get('/login/index', 'index')->name('login.index');
+    Route::get('/login', 'index')->name('login');
     Route::post('/login', 'store')->name('login.store');
-    Route::post('/logout', 'destroy')->name('login.destroy');
-
-
-    Route::get('/login/user', 'index')->name('users.index');
     Route::get('/logout', 'destroy')->name('logout');
 });
 
@@ -44,6 +37,8 @@ Route::controller(RegisterController::class)->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
     route::controller(BrandsController::class)->group(function () {
         Route::get('/brands', 'index')->name('brands.index');
     });
