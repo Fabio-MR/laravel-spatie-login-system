@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/permission/create', 'create')->name('permissions.create');
         Route::get('/permission/{permission}/edit', 'edit')->name('permissions.edit');
         Route::post('/permission', 'store')->name('permissions.store');
-        Route::post('/permission/update', 'update')->name('permissions.update');
+        Route::put('/permission/{id}/update', 'update')->name('permissions.update');
     });
 
     route::controller(RolesController::class)->group(function () {
