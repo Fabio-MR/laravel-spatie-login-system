@@ -20,8 +20,8 @@ class UsersTableSeeder extends Seeder
 
         $users = [
             ['name' => 'Super User', 'email' => 'super@email.com', 'password' => 'secret', 'role' => 'Superuser'],
-            ['name' => 'Admin User', 'email' => 'admin@email.com', 'password' => 'secret', 'role' => 'Admin'],
-            ['name' => 'User User', 'email' => 'user@email.com', 'password' => 'secret', 'role' => 'User']
+            ['name' => 'Admin User', 'email' => 'admin@email.com', 'password' => 'secret', 'role' => 'Administrador'],
+            ['name' => 'User User', 'email' => 'user@email.com', 'password' => 'secret', 'role' => 'Comum']
         ];
 
         foreach ($users as $usr) {
