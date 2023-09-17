@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.118.2">
-    <title>Dashboard Template · Bootstrap v5.3</title>
+    <title>{{ env('APP_NAME', '') }}</title>
 
     <link rel="canonical" href="{{ route('home.index') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
@@ -321,33 +321,7 @@
                                     </a>
                                 </li>
                             @endcan
-                            {{-- <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="#">
-                                    <svg class="bi">
-                                        <use xlink:href="#graph-up" />
-                                    </svg>
-                                    Reports
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="#">
-                                    <svg class="bi">
-                                        <use xlink:href="#puzzle" />
-                                    </svg>
-                                    Integrations
-                                </a>
-                            </li> --}}
                         </ul>
-
-                        {{-- <h6
-                            class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
-                            <span>Administração</span>
-                            <a class="link-secondary" href="#" aria-label="Add a new report">
-                                <svg class="bi">
-                                    <use xlink:href="#plus-circle" />
-                                </svg>
-                            </a>
-                        </h6> --}}
                         <hr class="my-3">
                         <ul class="nav flex-column mb-auto">
                             @can('view_users')
@@ -364,7 +338,6 @@
                                 <li class="nav-item">
                                     <a class="nav-link d-flex align-items-center gap-2" href="{{ route('roles.index') }}">
                                         <svg class="bi">
-                                            {{-- <use xlink:href="#file-earmark-text" /> --}}
                                             <use xlink:href="#gear-wide-connected" />
                                         </svg>
                                         Funções
@@ -382,27 +355,11 @@
                                     </a>
                                 </li>
                             @endcan
-                            {{-- <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="#">
-                                    <svg class="bi">
-                                        <use xlink:href="#file-earmark-text" />
-                                    </svg>
-                                    Year-end sale
-                                </a>
-                            </li> --}}
                         </ul>
 
                         <hr class="my-3">
 
                         <ul class="nav flex-column mb-auto">
-                            {{-- <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="#">
-                                    <svg class="bi">
-                                        <use xlink:href="#gear-wide-connected" />
-                                    </svg>
-                                    Settings
-                                </a>
-                            </li> --}}
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2" href="{{ route('logout') }}">
                                     <svg class="bi">

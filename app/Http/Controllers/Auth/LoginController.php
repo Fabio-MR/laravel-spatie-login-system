@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use Auth;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -15,7 +16,7 @@ class LoginController extends Controller
     {
 
 
-        return view('login.index');
+        return view('auth.login');
     }
 
     public function store(Request $request)
